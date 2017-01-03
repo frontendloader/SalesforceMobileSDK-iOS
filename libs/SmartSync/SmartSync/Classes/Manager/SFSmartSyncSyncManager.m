@@ -467,7 +467,7 @@ static NSMutableDictionary *syncMgrList = nil;
     __block NSMutableArray* remoteIds = [[NSMutableArray alloc] init];
     [((SFSyncDownTarget*) sync.target) getListOfRemoteIds:self localIds:localIds errorBlock:^(NSError* e) {
         [weakSelf log:SFLogLevelError format:@"Failed to get list of remote IDs, %@", [e localizedDescription]];
-        completionStatusBlock(SFSyncStateStatusFailed);
+        if(completionStatusBlock) completionStatusBlock(SFSyncStateStatusFailed);
     } completeBlock:^(NSArray* records) {
         if (records != nil) {
             for (NSDictionary* record in records) {
@@ -485,7 +485,7 @@ static NSMutableDictionary *syncMgrList = nil;
                 [weakSelf.store removeEntriesByQuery:querySpec fromSoup:soupName];
             }
         }
-        completionStatusBlock(SFSyncStateStatusDone);
+        if(completionStatusBlock) completionStatusBlock(SFSyncStateStatusDone);
     }];
 }
 

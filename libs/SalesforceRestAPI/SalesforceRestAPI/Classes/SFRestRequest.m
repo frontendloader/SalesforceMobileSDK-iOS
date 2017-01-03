@@ -260,6 +260,9 @@ NSString * const kSFDefaultRestEndpoint = @"/services/data";
 #pragma mark - SalesforceNetwork helpers
 
 - (void)handleCSFActionResponse:(CSFAction *)action error:(NSError *)error {
+    NSString *limitInfo = [action.httpResponse.allHeaderFields nonNullObjectForKey:@"Sforce-Limit-Info"];
+    [SFLogger log:self.class level:SFLogLevelInfo msg:limitInfo];
+    
     if (error != nil) {
         if (error.code == CSFNetworkCancelledError) {
             if ([self.delegate respondsToSelector:@selector(requestDidCancelLoad:)]) {

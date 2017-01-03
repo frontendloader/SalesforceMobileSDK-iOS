@@ -1544,7 +1544,7 @@ NSString *const EXPLAIN_ROWS = @"rows";
     // SQL
     NSString* sql = [self convertSmartSql: querySpec.smartSql withDb:db];
     NSString* limitSql = [@[@"SELECT * FROM (", sql, @") LIMIT ", limit] componentsJoinedByString:@""];
-    // [self log:SFLogLevelDebug format:@"queryWithQuerySpec: \nlimitSql:%@ \npageIndex:%d \n", limitSql, pageIndex];
+    [self log:SFLogLevelDebug format:@"queryWithQuerySpec: \nlimitSql:%@ \npageIndex:%d \n", limitSql, pageIndex];
     
     // Args
     NSArray* args = [querySpec bindsForQuerySpec];

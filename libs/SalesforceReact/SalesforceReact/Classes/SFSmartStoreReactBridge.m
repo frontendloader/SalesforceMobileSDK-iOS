@@ -59,6 +59,8 @@ NSString * const kIsGlobalStoreArg    = @"isGlobalStore";
 
 @implementation SFSmartStoreReactBridge
 
+@synthesize userCursorCache = _userCursorCache;
+
 RCT_EXPORT_MODULE();
 
 #pragma mark - Bridged methods
@@ -384,4 +386,10 @@ RCT_EXPORT_METHOD(showInspector:(NSDictionary *)argsDict callback:(RCTResponseSe
     return [[SFStoreCursor alloc] initWithStore:[self getStoreInst:argsDict] querySpec:querySpec totalEntries:totalEntries firstPageEntries:firstPageEntries];
 }
 
+- (NSMutableDictionary *) userCursorCache {
+    if(!_userCursorCache) {
+        _userCursorCache = [[NSMutableDictionary alloc] init];
+    }
+    return _userCursorCache;
+}
 @end

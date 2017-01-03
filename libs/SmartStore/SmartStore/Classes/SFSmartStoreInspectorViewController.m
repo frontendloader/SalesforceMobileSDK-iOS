@@ -184,9 +184,9 @@ static NSString * const kInspectorRunButtonTitleKey = @"inspectorRunButtonTitle"
 - (void) soupsButtonClicked
 {
     NSArray* names = [self.store allSoupNames];
-    if ([names count] > 10) {
+    /*if ([names count] > 10) {
         self.queryField.text = @"SELECT soupName from soup_nameSFs";
-    } else {
+    } else {*/
         NSMutableString* q = [NSMutableString string];
         BOOL first = YES;
         for (NSString* name in names) {
@@ -196,7 +196,7 @@ static NSString * const kInspectorRunButtonTitleKey = @"inspectorRunButtonTitle"
             first = false;
         }
         self.queryField.text = q;
-    }
+    //}
     [self runQuery];
 }
 
